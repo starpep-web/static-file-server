@@ -14,6 +14,24 @@ pipeline {
   }
 
   stages {
+    stage('Get Submodules') {
+      when {
+        allOf {
+          branch 'master'
+
+          not {
+            changeRequest()
+          }
+        }
+      }
+
+      steps {
+        echo 'Getting submodules...'
+
+        git submodule update --init
+      }
+    }
+
     stage('Build Docker Image') {
       when {
         allOf {
