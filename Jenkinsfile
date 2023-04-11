@@ -28,7 +28,9 @@ pipeline {
       steps {
         echo 'Getting submodules...'
 
-        sh 'git submodule update --init'
+        withCredentials([gitUsernamePassword(credentialsId: 'gitea_packages_account', gitToolName: 'git-tool')]) {
+          sh 'git submodule update --init'
+        }
       }
     }
 
