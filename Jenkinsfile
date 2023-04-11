@@ -28,7 +28,7 @@ pipeline {
       steps {
         echo 'Getting submodules...'
 
-        git submodule update --init
+        sh 'git submodule update --init'
       }
     }
 
