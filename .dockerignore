@@ -1,0 +1,9 @@
+# Ignore everything by default
+*
+
+# Allow the public project files.
+!Dockerfile
+!README.md
+!config/
+!compressed/
+!nginx.conf
