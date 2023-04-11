@@ -1,0 +1,3 @@
+[submodule "static-files"]
+	path = compressed
+	url = https://code.moonstar-x.dev/webpep/static-files
