@@ -8,6 +8,16 @@ This is an nginx server with the assets already included in the image.
 
 In order to make use of this Docker image, [Docker](https://www.docker.com/) should be installed in your machine.
 
+## Submodules
+
+The `compressed` folder is a git submodule of the [repo](https://code.moonstar-x.dev/webpep/static-files) that contains the compressed assets.
+
+If you need to download this you will need to login with your credentials from the [registry](https://code.moonstar-x.dev/webpep). Then you can run:
+
+```text
+git submodule update --init
+```
+
 ## Building
 
 To build this image, run the following command from the folder of this repository.
