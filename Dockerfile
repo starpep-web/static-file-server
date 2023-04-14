@@ -31,6 +31,10 @@ COPY --from=build /tmp/StarPepFasta /files/fasta
 # DB ZIP
 COPY ./compressed/db /files/db
 
+# ZIPPED ARCHIVES
+COPY ./compressed/1_3D_StarPepFasta2PDB_ESMfold.zip /files/zip/StarPepPDB.zip
+COPY ./compressed/StarPepFasta.zip /files/zip/StarPepFASTA.zip
+
 #---- END FILES COPY ----#
 
 COPY ./config/ /etc/nginx/config/
