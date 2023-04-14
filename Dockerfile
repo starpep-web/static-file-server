@@ -28,6 +28,9 @@ COPY --from=build /tmp/1_3D_StarPepFasta2PDB_ESMfold /files/pdb
 # FASTAs
 COPY --from=build /tmp/StarPepFasta /files/fasta
 
+# DB ZIP
+COPY ./compressed/db /files/db
+
 #---- END FILES COPY ----#
 
 COPY ./config/ /etc/nginx/config/
