@@ -12,6 +12,10 @@ RUN unzip 1_3D_StarPepFasta2PDB_ESMfold.zip && rm 1_3D_StarPepFasta2PDB_ESMfold.
 COPY ./compressed/StarPepFASTA.zip ./
 RUN unzip StarPepFASTA.zip && rm StarPepFASTA.zip
 
+# Metadata CSVs
+COPY ./compressed/StarPep-Metadata-CSV.zip ./
+RUN unzip StarPep-Metadata-CSV.zip && rm StarPep-Metadata-CSV.zip
+
 #---- END UNZIP COMPRESSED ----#
 
 FROM nginx:stable-alpine
@@ -28,8 +32,14 @@ COPY --from=build /tmp/1_3D_StarPepFasta2PDB_ESMfold /files/pdb
 # FASTAs
 COPY --from=build /tmp/StarPepFASTA /files/fasta
 
-# DB ZIP
+# CSVs
+COPY --from=build /tmp/StarPep-Metadata-CSV /files/csv/metadata
+
+# DB ZIP(s)
 COPY ./compressed/db /files/db
+
+# Full Files
+COPY ./compressed/full /files/full
 
 # ZIPPED ARCHIVES
 COPY ./compressed/1_3D_StarPepFasta2PDB_ESMfold.zip /files/zip/StarPepPDB.zip
