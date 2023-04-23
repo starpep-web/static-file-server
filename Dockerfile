@@ -4,17 +4,21 @@ WORKDIR /tmp
 
 #---- START UNZIP COMPRESSED ----#
 
-# PDBs
+# Peptide PDBs
 COPY ./compressed/1_3D_StarPepFasta2PDB_ESMfold.zip ./
 RUN unzip 1_3D_StarPepFasta2PDB_ESMfold.zip && rm 1_3D_StarPepFasta2PDB_ESMfold.zip
 
-# FASTAs
+# Peptide FASTAs
 COPY ./compressed/StarPepFASTA.zip ./
 RUN unzip StarPepFASTA.zip && rm StarPepFASTA.zip
 
-# Metadata CSVs
+# Peptide Metadata CSVs
 COPY ./compressed/StarPep-Metadata-CSV.zip ./
 RUN unzip StarPep-Metadata-CSV.zip && rm StarPep-Metadata-CSV.zip
+
+# FASTA by Database
+COPY ./compressed/StarPepFASTA-Databases.zip ./
+RUN unzip StarPepFASTA-Databases.zip && rm StarPepFASTA-Databases.zip
 
 #---- END UNZIP COMPRESSED ----#
 
@@ -41,8 +45,12 @@ COPY ./compressed/db /files/db
 # Full Files
 COPY ./compressed/full /files/full
 
+# FASTA by Database
+COPY --from=build /tmp/fasta-by-db /files/fasta-by-db
+
 # ZIPPED ARCHIVES
 COPY ./compressed/1_3D_StarPepFasta2PDB_ESMfold.zip /files/zip/StarPepPDB.zip
+COPY ./compressed/StarPepFASTA-Databases.zip /files/zip/StarPepFASTA-Databases.zip
 
 #---- END FILES COPY ----#
 
