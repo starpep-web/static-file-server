@@ -43,7 +43,6 @@ COPY ./compressed/full /files/full
 
 # ZIPPED ARCHIVES
 COPY ./compressed/1_3D_StarPepFasta2PDB_ESMfold.zip /files/zip/StarPepPDB.zip
-COPY ./compressed/StarPepFASTA.zip /files/zip/StarPepFASTA.zip
 
 #---- END FILES COPY ----#
 
