@@ -26,14 +26,14 @@ WORKDIR /files
 
 #---- START FILES COPY ----#
 
-# PDBs
-COPY --from=build /tmp/1_3D_StarPepFasta2PDB_ESMfold /files/pdb
+# Peptides - PDBs
+COPY --from=build /tmp/1_3D_StarPepFasta2PDB_ESMfold /files/peptides/pdb
 
-# FASTAs
-COPY --from=build /tmp/StarPepFASTA /files/fasta
+# Peptides - FASTAs
+COPY --from=build /tmp/StarPepFASTA /files/peptides/fasta
 
-# CSVs
-COPY --from=build /tmp/StarPep-Metadata-CSV /files/csv/metadata
+# Peptides - CSVs
+COPY --from=build /tmp/StarPep-Metadata-CSV /files/peptides/csv/metadata
 
 # DB ZIP(s)
 COPY ./compressed/db /files/db
