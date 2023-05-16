@@ -8,6 +8,10 @@ WORKDIR /tmp
 COPY ./compressed/1_3D_StarPepFasta2PDB_ESMfold.zip ./
 RUN unzip 1_3D_StarPepFasta2PDB_ESMfold.zip && rm 1_3D_StarPepFasta2PDB_ESMfold.zip
 
+# Peptide PDB Previews
+COPY ./compressed/StarPep-PDB-Previews.zip ./
+RUN unzip StarPep-PDB-Previews.zip && rm StarPep-PDB-Previews.zip
+
 # Peptide FASTAs
 COPY ./compressed/StarPepFASTA.zip ./
 RUN unzip StarPepFASTA.zip && rm StarPepFASTA.zip
@@ -32,6 +36,9 @@ WORKDIR /files
 
 # Peptides - PDBs
 COPY --from=build /tmp/1_3D_StarPepFasta2PDB_ESMfold /files/peptides/pdb
+
+# Peptides - PDB Previews
+COPY --from=build /tmp/pdb-previews /files/peptides/previews/pdb
 
 # Peptides - FASTAs
 COPY --from=build /tmp/StarPepFASTA /files/peptides/fasta
