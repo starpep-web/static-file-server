@@ -24,6 +24,18 @@ RUN unzip StarPep-Metadata-CSV.zip && rm StarPep-Metadata-CSV.zip
 COPY ./compressed/StarPepFASTA-Databases.zip ./
 RUN unzip StarPepFASTA-Databases.zip && rm StarPepFASTA-Databases.zip
 
+# Embeddings: ESM_Mean
+COPY ./compressed/StarPep-Embeddings-ESM_Mean-CSV.zip ./
+RUN unzip StarPep-Embeddings-ESM_Mean-CSV.zip && rm StarPep-Embeddings-ESM_Mean-CSV.zip
+
+# Embeddings: iFeature_AAC_20
+COPY ./compressed/StarPep-Embeddings-iFeature_AAC_20-CSV.zip ./
+RUN unzip StarPep-Embeddings-iFeature_AAC_20-CSV.zip && rm StarPep-Embeddings-iFeature_AAC_20-CSV.zip
+
+# Embeddings: iFeature_DPC_400
+COPY ./compressed/StarPep-Embeddings-iFeature_DPC_400-CSV.zip ./
+RUN unzip StarPep-Embeddings-iFeature_DPC_400-CSV.zip && rm StarPep-Embeddings-iFeature_DPC_400-CSV.zip
+
 #---- END UNZIP COMPRESSED ----#
 
 FROM nginx:stable-alpine
@@ -45,6 +57,11 @@ COPY --from=build /tmp/StarPepFASTA /files/peptides/fasta
 
 # Peptides - CSVs
 COPY --from=build /tmp/StarPep-Metadata-CSV /files/peptides/csv/metadata
+
+# Embeddings - CSVs
+COPY --from=build /tmp/esm-mean-single /files/peptides/csv/embeddings/esm-mean
+COPY --from=build /tmp/ifeature-aac-single /files/peptides/csv/embeddings/ifeature-aac-20
+COPY --from=build /tmp/ifeature-dpc-single /files/peptides/csv/embeddings/ifeature-dpc-400
 
 # DB ZIP(s)
 COPY ./compressed/db /files/db
