@@ -20,6 +20,10 @@ RUN unzip StarPepFASTA.zip && rm StarPepFASTA.zip
 COPY ./compressed/StarPep-Metadata-CSV.zip ./
 RUN unzip StarPep-Metadata-CSV.zip && rm StarPep-Metadata-CSV.zip
 
+# Peptide Attributes CSVs
+COPY ./compressed/StarPep-Attributes-CSV.zip ./
+RUN unzip StarPep-Attributes-CSV.zip && rm StarPep-Attributes-CSV.zip
+
 # FASTA by Database
 COPY ./compressed/StarPepFASTA-Databases.zip ./
 RUN unzip StarPepFASTA-Databases.zip && rm StarPepFASTA-Databases.zip
@@ -57,6 +61,7 @@ COPY --from=build /tmp/StarPepFASTA /files/peptides/fasta
 
 # Peptides - CSVs
 COPY --from=build /tmp/StarPep-Metadata-CSV /files/peptides/csv/metadata
+COPY --from=build /tmp/csv-attributes /files/peptides/csv/attributes
 
 # Embeddings - CSVs
 COPY --from=build /tmp/esm-mean-single /files/peptides/csv/embeddings/esm-mean
