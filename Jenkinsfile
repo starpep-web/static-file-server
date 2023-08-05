@@ -32,26 +32,6 @@ pipeline {
         }
       }
     }
-    
-    stage('Get Submodules') {
-      when {
-        allOf {
-          branch 'master'
-
-          not {
-            changeRequest()
-          }
-        }
-      }
-
-      steps {
-        echo 'Getting submodules...'
-
-        withCredentials([gitUsernamePassword(credentialsId: 'gitea_packages_account', gitToolName: 'git-tool')]) {
-          sh 'git submodule update --init'
-        }
-      }
-    }
 
     stage('Build Docker Image') {
       when {
@@ -68,7 +48,7 @@ pipeline {
         echo 'Building docker image...'
 
         script {
-          image = docker.build(DOCKER_IMAGE, "--no-cache .")
+          image = docker.build(DOCKER_IMAGE)
         }
       }
     }
