@@ -8,16 +8,6 @@ This is an nginx server with the assets already included in the image.
 
 In order to make use of this Docker image, [Docker](https://www.docker.com/) should be installed in your machine.
 
-## Submodules
-
-The `compressed` folder is a git submodule of the [repo](https://code.moonstar-x.dev/webpep/static-files) that contains the compressed assets.
-
-If you need to download this you will need to login with your credentials from the [registry](https://code.moonstar-x.dev/webpep). Then you can run:
-
-```text
-git submodule update --init
-```
-
 ## Building
 
 To build this image, run the following command from the folder of this repository.
@@ -42,19 +32,7 @@ docker run -it --rm -p 8080:8080 test/static-file-server
 
 ## Content
 
-The `compressed` folder contains the assets to serve compressed. The `Dockerfile` should unzip these archives in the build stage and copy them into the `/files` folder in the main stage.
+Content is no longer provided inside the Docker image. Instead, a git repo with the content can be found in the image's registry. This folder should be used as a volume when creating the container
+to serve the proper data.
 
-For example, let's say we have a `my-files.zip` file that needs to be served in the `/cool-files` path. You should add the following entries into the `Dockerfile`'s build stage:
-
-```docker
-COPY ./compressed/my-files.zip ./
-RUN unzip my-files.zip && rm my-files.zip
-```
-
-And in the main stage:
-
-```docker
-COPY --from=build /tmp/my-files /files/cool-files
-```
-
-Make sure to add this line above the `COPY config...` lines to avoid having to copy these files whenever a change is made to the config files.
+* Data assets should be mounted as a volume in `/files`.
