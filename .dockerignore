@@ -5,5 +5,4 @@
 !Dockerfile
 !README.md
 !config/
-!compressed/
 !nginx.conf
