@@ -1,0 +1,17 @@
+name: On Push (Main)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Docker Image
+    uses: ./.github/workflows/callable-build.yml
+    with:
+      ghcr_username: ${{ github.actor }}
+      ghcr_image_name: ${{ github.repository }}
+      image_tag: latest
+    secrets:
+      ghcr_token: ${{ secrets.GITHUB_TOKEN }}
